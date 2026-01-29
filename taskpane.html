@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LCM PowerPoint A11y Checker</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="sidebar">
+    <div class="scan-options-card">
+      <div class="scan-options-header"><h3>📊 Scan Options</h3></div>
+      <div class="scan-mode-selector">
+        <label class="radio-option">
+          <input type="radio" name="scanMode" value="all" id="scan-all" checked />
+          <span class="radio-label">Entire Deck</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="scanMode" value="range" id="scan-range" />
+          <span class="radio-label">Slide Range</span>
+        </label>
+      </div>
+
+      <div class="page-range-container" id="page-range-container" style="display:none;">
+        <div class="range-header">
+          <span class="range-label">From slide <span id="range-from-display">1</span> to slide <span id="range-to-display">1</span></span>
+          <span class="range-total">(<span id="range-total-display">1</span> slides)</span>
+        </div>
+
+        <div class="dual-range-slider">
+          <div class="range-track"><div class="range-fill" id="range-fill"></div></div>
+          <input type="range" id="range-from" class="range-input range-from" min="1" max="1" value="1" />
+          <input type="range" id="range-to" class="range-input range-to" min="1" max="1" value="1" />
+        </div>
+
+        <div class="range-inputs">
+          <div class="range-input-group">
+            <label for="range-from-number">From:</label>
+            <input type="number" id="range-from-number" class="range-number-input" min="1" max="1" value="1" />
+          </div>
+          <div class="range-input-group">
+            <label for="range-to-number">To:</label>
+            <input type="number" id="range-to-number" class="range-number-input" min="1" max="1" value="1" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary" aria-live="polite">
+      <div class="summary__text" id="summary-text">Ready to check</div>
+    </div>
+
+    <div class="toolbar" role="group" aria-label="Actions">
+      <button class="btn primary" id="check-accessibility">Check All</button>
+      <button class="btn" id="export-json">Export JSON</button>
+      <button class="btn" id="export-csv">Export CSV</button>
+      <button class="btn" id="clear-resolved">Clear Resolved</button>
+    </div>
+
+    
+    <section class="panel" id="scoring-summary">
+      <header class="panel__head">
+        <h3 class="panel__title">Scoring Summary</h3>
+        <span class="pill success hidden" id="scoring-badge">—</span>
+      </header>
+      <div class="score-grid" id="score-grid">
+        <div class="score-card">
+          <div class="score-label">Open (All)</div>
+          <div class="score-value" id="score-open-total">—</div>
+        </div>
+        <div class="score-card">
+          <div class="score-label">Open (After filters)</div>
+          <div class="score-value" id="score-open-filtered-total">—</div>
+        </div>
+        <div class="score-card">
+          <div class="score-label">Resolved</div>
+          <div class="score-value" id="score-resolved-total">—</div>
+        </div>
+        <div class="score-card">
+          <div class="score-label">Critical</div>
+          <div class="score-value" id="score-open-critical">—</div>
+        </div>
+        <div class="score-card">
+          <div class="score-label">Serious</div>
+          <div class="score-value" id="score-open-serious">—</div>
+        </div>
+        <div class="score-card">
+          <div class="score-label">Moderate</div>
+          <div class="score-value" id="score-open-moderate">—</div>
+        </div>
+        <div class="score-card">
+          <div class="score-label">Minor</div>
+          <div class="score-value" id="score-open-minor">—</div>
+        </div>
+      </div>
+      <div class="score-foot muted" id="score-foot">Run a scan to see counts.</div>
+      <div class="score-foot muted" id="score-delta"></div>
+      <div class="score-foot muted" id="score-gate"></div>
+    </section>
+
+<div class="progress-container" id="progress-container" style="display:none;">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <section class="panel" id="issue-filters">
+      <header class="panel__head">
+        <h3 class="panel__title">Issue Filters</h3>
+      </header>
+      <div style="padding:8px;display:flex;gap:12px;flex-wrap:wrap;">
+        <label style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:700;">
+          <input type="checkbox" id="toggle-hide-resolved" checked /> Hide resolved
+        </label>
+        <label style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:700;">
+          <input type="checkbox" id="toggle-show-warnings" checked /> Show warnings
+        </label>
+        <div style="flex-basis:100%;height:0;"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <span style="font-size:13px;font-weight:800;">Severity:</span>
+          <label style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:700;">
+            <input type="checkbox" id="sev-critical" checked /> Critical
+          </label>
+          <label style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:700;">
+            <input type="checkbox" id="sev-serious" checked /> Serious
+          </label>
+          <label style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:700;">
+            <input type="checkbox" id="sev-moderate" checked /> Moderate
+          </label>
+          <label style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:700;">
+            <input type="checkbox" id="sev-minor" checked /> Minor
+          </label>
+        </div>
+</div>
+    </section>
+
+<section class="panel">
+      <header class="panel__head">
+        <h3 class="panel__title">Checks</h3>
+        <span class="pill success hidden" id="panel-badge">Passed</span>
+      </header>
+      <ul class="list" id="results-list"></ul>
+    </section>
+
+    <section class="panel">
+      <header class="panel__head">
+        <h3 class="panel__title">Issues</h3>
+      </header>
+      <div class="issues-container" id="issues-container">
+        <div class="muted">Run a scan to see issues.</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="taskpane.js"></script>
+</body>
+</html>
