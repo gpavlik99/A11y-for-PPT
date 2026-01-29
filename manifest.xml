@@ -12,7 +12,7 @@
   <Description DefaultValue="Checks common accessibility issues in PowerPoint decks and provides guidance."/>
   <IconUrl DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-128.png"/>
-  <SupportUrl DefaultValue="https://a11y-for-ppt.vercel.app/support"/>
+  <SupportUrl DefaultValue="https://a11y-for-ppt.vercel.app/taskpane.html"/>
   <AppDomains>
     <AppDomain>https://a11y-for-ppt.vercel.app</AppDomain>
   </AppDomains>
