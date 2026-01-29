@@ -12,7 +12,7 @@
   <Description DefaultValue="Checks common accessibility issues in PowerPoint decks and provides guidance."/>
   <IconUrl DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-128.png"/>
-  <SupportUrl DefaultValue="https://a11y-for-ppt.vercel.app:3000/support"/>
+  <SupportUrl DefaultValue="https://a11y-for-ppt.vercel.app/support"/>
   <AppDomains>
     <AppDomain>https://a11y-for-ppt.vercel.app</AppDomain>
   </AppDomains>
@@ -67,13 +67,13 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-        <bt:Image id="Icon.32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-        <bt:Image id="Icon.80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+<bt:Image id="Icon.16" DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-16.png"/>
+<bt:Image id="Icon.32" DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-32.png"/>
+<bt:Image id="Icon.80" DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
-        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
+<bt:Url id="Taskpane.Url" DefaultValue="https://a11y-for-ppt.vercel.app/taskpane.html"/>
+<bt:Url id="Commands.Url" DefaultValue="https://a11y-for-ppt.vercel.app/commands.html"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="LCM.A11y.GroupLabel" DefaultValue="LCM A11y"/>
