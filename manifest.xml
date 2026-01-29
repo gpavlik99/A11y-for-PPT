@@ -10,11 +10,11 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="LCM PowerPoint A11y Checker"/>
   <Description DefaultValue="Checks common accessibility issues in PowerPoint decks and provides guidance."/>
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-128.png"/>
-  <SupportUrl DefaultValue="https://localhost:3000/support"/>
+  <IconUrl DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://a11y-for-ppt.vercel.app/assets/icon-128.png"/>
+  <SupportUrl DefaultValue="https://a11y-for-ppt.vercel.app:3000/support"/>
   <AppDomains>
-    <AppDomain>https://localhost:3000</AppDomain>
+    <AppDomain>https://a11y-for-ppt.vercel.app</AppDomain>
   </AppDomains>
 
   <Hosts>
@@ -28,7 +28,7 @@
   </Requirements>
 
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+    <SourceLocation DefaultValue="https://a11y-for-ppt.vercel.app/taskpane.html"/>
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
